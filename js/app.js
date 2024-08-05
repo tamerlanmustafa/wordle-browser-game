@@ -15,3 +15,52 @@
 // // create handleClick function
 // // create updateBoard function to update UI on the page
 // // create updateMessage function to message win/fail
+
+/*-------------------------------- Constants --------------------------------*/
+
+const attemptEl = document.querySelector('#attempts')
+const instructionsEl = document.querySelector('#instructions')
+const messageEl = document.querySelector('#message')
+const squareEls = document.querySelectorAll('.sqr')
+const submitButtonEl = document.querySelector('#submit')
+const newGameButtonEl = document.querySelector('#new-game')
+
+
+const attempts = 5
+const userGuesses = [[], [], [], [], []]
+
+
+/*---------------------------- Variables (state) ----------------------------*/
+
+
+
+/*------------------------ Cached Element References ------------------------*/
+
+squareEls.forEach((squareEl) => {
+    squareEl.addEventListener('keydown', handleKeydown)
+})
+
+
+/*----------------------------- Event Listeners -----------------------------*/
+
+
+
+/*-------------------------------- Functions --------------------------------*/
+
+function handleKeydown(event) {
+    console.log(event.key, event.code)
+}
+
+
+function render() {
+
+}
+
+function updateMessage() {
+
+}
+
+
+function updateMessage() {
+
+}
