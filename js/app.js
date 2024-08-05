@@ -33,23 +33,30 @@ const userGuesses = [[], [], [], [], []]
 /*---------------------------- Variables (state) ----------------------------*/
 
 
+squareEls.forEach(squareEl => {
+    squareEl.addEventListener('click', handleClick)
+})
+
+function handleClick(squareEl) {
+    squareEl.style.backgroundColor = 'red'
+}
+
 
 /*------------------------ Cached Element References ------------------------*/
 
-squareEls.forEach((squareEl) => {
-    squareEl.addEventListener('keydown', handleKeydown)
-})
+
+
+
 
 
 /*----------------------------- Event Listeners -----------------------------*/
 
 
 
+
 /*-------------------------------- Functions --------------------------------*/
 
-function handleKeydown(event) {
-    console.log(event.key, event.code)
-}
+
 
 
 function render() {
