@@ -16,18 +16,29 @@
 // // create updateBoard function to update UI on the page
 // // create updateMessage function to message win/fail
 
-/*-------------------------------- Constants --------------------------------*/
+/*-------------------------------- Constants/ Cached Elements--------------------------------*/
 
 const attemptEl = document.querySelector('#attempts')
 const instructionsEl = document.querySelector('#instructions')
 const messageEl = document.querySelector('#message')
 const squareEls = document.querySelectorAll('.sqr')
+const rowEls = document.querySelectorAll('.row')
 const submitButtonEl = document.querySelector('#submit')
 const newGameButtonEl = document.querySelector('#new-game')
 
 const attempts = 5
 const userGuesses = [['s', 'm', 'i', 'l', 'e'], [], [], [], []]
+const board = [
+    '', '', '', '', '',
+    '', '', '', '', '',    
+    '', '', '', '', '',   
+    '', '', '', '', '',    
+    '', '', '', '', '',
+]
+
 const targetWords = ['salam']
+
+
 
 
 /*---------------------------- Variables (state) ----------------------------*/
@@ -46,36 +57,27 @@ const targetWords = ['salam']
 
 
 
-for (let i = 0; i < squareEls.length; i++) {
-    squareEls[i].addEventListener('keydown', handleKeydown)
-}
-
 
 
 
 /*-------------------------------- Functions --------------------------------*/
 
 function handleKeydown(event) {
-    const currentCell = event.target
-    const nextCell = document.getElementById(Number(event.target.id)+1)
-    const pressedKey = event.key
 
+}
 
-    if (currentCell.textContent.length == 0) {
-        // Assign the pressed key value from keyboard to the currently focused sqr div
-        currentCell.textContent = pressedKey
-    } else {
-        // Once currentCell has at least 1 char or is not empty then focus shifts to the next cell 
-        nextCell.focus()
-        nextCell.textContent = pressedKey
-
-    }
-}   
+function matchTarget(event) {
+      
+}
 
 
 
-function render() {
+function init() {
 
+}
+
+
+function updateBoard() {
 }
 
 
@@ -83,3 +85,4 @@ function render() {
 function updateMessage() {
 
 }
+
