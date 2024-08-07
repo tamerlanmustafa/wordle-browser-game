@@ -27,34 +27,38 @@ const submitButtonEl = document.querySelector('#submit')
 const newGameButtonEl = document.querySelector('#new-game')
 
 const attempts = 5
+let currentRowIndex = 0
 const userGuesses = [[], [], [], [], []]
-const board = [
-    '', '', '', '', '',
-    '', '', '', '', '',    
-    '', '', '', '', '',   
-    '', '', '', '', '',    
-    '', '', '', '', '',
-]
+
 
 const targetWords = ['smile']
-
-
-// for (let sqr of squareEls) {
-//     let currentCellId = sqr.id
-//     console.log(currentCellId)
-//     }
-
-
 
 document.addEventListener('DOMContentLoaded', () => {
     squareEls.forEach((squareEl) => {
         squareEl.addEventListener('keydown', handleKeydown);
-
-        function handleKeydown(event) {
+         
+        function handleKeydown(event) { 
             
             if (squareEl.textContent.length == 0 && /^[a-zA-Z]$/.test(event.key)) {
                 // Display the pressed key value in squareEL
-                squareEl.textContent = event.key 
+                squareEl.textContent = event.key
+
+
+
+                if (currentRowIndex < userGuesses.length) {
+
+                    if (userGuesses[currentRowIndex].length < 5) {
+                        // If current row is not full of 5 characters...
+                        // ..then push the pressed key value into userGuesses ...
+                        // ..array at that row's index
+                        userGuesses[currentRowIndex].push(event.key)
+                    } else {
+                        currentRowIndex++
+                        userGuesses[currentRowIndex].push(event.key)
+                    }
+                }
+
+                // console.log(userGuesses)
                 
                 // Move focus to the next cell/sqr
                 squareEls[Number(event.target.id)+1].focus()
@@ -70,33 +74,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Focus first cell when DOM loads
     squareEls[0].focus()
-
-    
 })
 
-// NEXT write a function to disable typing once 5 letters are typed 
+function submit() {
 
+    // if user typed first guess disable other cells to force submit
+    if (userGuesses[currentRowIndex].length == 5) {
+        
+    }
+}
 
-/*---------------------------- Variables (state) ----------------------------*/
-
-
-
-
-/*------------------------ Cached Element References ------------------------*/
-
-
-
-
-
-
-/*----------------------------- Event Listeners -----------------------------*/
-
-
-
-
-
-
-/*-------------------------------- Functions --------------------------------*/
 
 function handleKeydown(event) {
 
