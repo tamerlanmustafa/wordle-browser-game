@@ -1,3 +1,17 @@
+
+
+
+:root {
+    --primary-color:#FEF3E2;
+    --secondary-color: #BEC6A0;
+    --alternative-color: #BEC6A0;
+    --backup-color: #606676;
+    --dark-green: #1A3636;
+
+}
+
+
+
 * {
     margin: 0;
     padding: 0;
@@ -5,12 +19,20 @@
     font-family: Arial, sans-serif;
 }
 
+header {
+    margin-top: 20px;
+    text-align: center;
+
+}
+
 body {
     height: 100vh;
     width: 100vw;
+    color: var(--dark-green);
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: var(--primary-color);
 }
 
 main {
@@ -37,7 +59,6 @@ main {
     justify-content: center;
     place-items: center;
     gap: 20px;
-    border: 1px solid red;
     aspect-ratio: 1/1;
 }
 
@@ -47,15 +68,45 @@ main {
 }
 
 .sqr {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
-    height: 50px;
-    font-size: 1.5rem;
+    height: 80px;
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
     text-align: center;
     aspect-ratio: 1/1;
-    border: 1px solid black;
+    border: 2px solid var(--secondary-color);
 }
+
 
 .sqr:focus {
-
-background-color: rgb(161, 161, 243);
+    background-color: var(--secondary-color);
 }
+
+.buttons {
+    width: 535px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    margin: 0 10px ;
+    width: 120px;
+    height: 60px;
+    cursor: pointer;
+    color: var(--dark-green);
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+    border: none;
+    /* border: 3px solid var(--dark-green); */
+    transition: all 200ms ease-in-out;
+}
+

@@ -39,33 +39,42 @@ const board = [
 const targetWords = ['smile']
 
 
-// const currentCellId = () => {
-//     for (let sqr of squareEls) {
-//         let id 
-//         return  id = sqr.id
+// for (let sqr of squareEls) {
+//     let currentCellId = sqr.id
+//     console.log(currentCellId)
 //     }
-// }
-
-// console.log(currentCellId)
 
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    squareEls.forEach((squareEl, index) => {
+    squareEls.forEach((squareEl) => {
         squareEl.addEventListener('keydown', handleKeydown);
 
         function handleKeydown(event) {
+            
             if (squareEl.textContent.length == 0 && /^[a-zA-Z]$/.test(event.key)) {
-                squareEl.textContent = event.key       
+                // Display the pressed key value in squareEL
+                squareEl.textContent = event.key 
+                
+                // Move focus to the next cell/sqr
+                squareEls[Number(event.target.id)+1].focus()
             } else if (squareEl.textContent.length == 1 && event.key == 'Backspace') {
                 squareEl.textContent = ''
+            } else if (squareEl.textContent.length == 0 && event.key == 'Backspace') {
+                // Move focus back to the previous cell and remove its content when backspace clicked
+                squareEls[Number(event.target.id)-1].focus()
+                squareEls[Number(event.target.id)-1].textContent = ''
             }
         }
     });
 
+    // Focus first cell when DOM loads
+    squareEls[0].focus()
+
     
 })
 
+// NEXT write a function to disable typing once 5 letters are typed 
 
 
 /*---------------------------- Variables (state) ----------------------------*/
