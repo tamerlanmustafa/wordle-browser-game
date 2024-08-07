@@ -27,7 +27,7 @@ const submitButtonEl = document.querySelector('#submit')
 const newGameButtonEl = document.querySelector('#new-game')
 
 const attempts = 5
-const userGuesses = [['s', 'm', 'i', 'l', 'e'], [], [], [], []]
+const userGuesses = [[], [], [], [], []]
 const board = [
     '', '', '', '', '',
     '', '', '', '', '',    
@@ -36,8 +36,35 @@ const board = [
     '', '', '', '', '',
 ]
 
-const targetWords = ['salam']
+const targetWords = ['smile']
 
+
+// const currentCellId = () => {
+//     for (let sqr of squareEls) {
+//         let id 
+//         return  id = sqr.id
+//     }
+// }
+
+// console.log(currentCellId)
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    squareEls.forEach((squareEl, index) => {
+        squareEl.addEventListener('keydown', handleKeydown);
+
+        function handleKeydown(event) {
+            if (squareEl.textContent.length == 0 && /^[a-zA-Z]$/.test(event.key)) {
+                squareEl.textContent = event.key       
+            } else if (squareEl.textContent.length == 1 && event.key == 'Backspace') {
+                squareEl.textContent = ''
+            }
+        }
+    });
+
+    
+})
 
 
 
