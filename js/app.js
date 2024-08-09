@@ -10,10 +10,17 @@ const newGameButtonEl = document.querySelector('#new-game')
 
 const attempts = 5
 const userGuesses = [[], [], [], [], []]
-const targetWords = ['smile']
+const targetWords = ['smile', 'agree']
 
 // VARIABLES //
 let currentRowIndex = 0 // identifies which row of 5 user is typing at
+
+
+// CACHED ELEMENT REFERENCES
+
+// Add handleSubmit function to submit button to check if user guess matches the target word 
+submitButtonEl.addEventListener('click', handleSubmit)
+
 
 
 
@@ -39,7 +46,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     // ..array at that row's index
                     if (userGuesses[currentRowIndex].length < 5) {
                         userGuesses[currentRowIndex].push(event.key)
-                        submit()
+                        callForSubmit()
+                       
+                        // if (userGuesses[currentRowIndex].indexOf(event.key) == 0) {
+                        //     squareEl.style.backgroundColor = 'blue'
+                        // }
                     }
                     // Once current row has 5 chars push most recently clicked key values into the next nested array
                     else {
@@ -62,30 +73,68 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 })
 
-function submit() {
+
+// FUNCTIONS
+function callForSubmit() {
     // if user typed first guess/5 character disable other cells to force submit
     if (userGuesses[currentRowIndex].length === 5) {
         messageEl.textContent = "SUBMIT YOUR GUESS"
-        // Set the BG color of the next row to emphasize that it is disabled
-        rowEls[currentRowIndex + 1].style.backgroundColor = 'darkred'
-
+        messageEl.classList.add('ask-submit')
+        
         // remove tabindex attribute from the next row in order to disable typing on the next row..
         // .. so that user knows they need to submit their current guess
-        rowEls[currentRowIndex + 1].forEach(rowEl => {
-            rowEl.removeAttribute('tabindex')
+        squareEls.forEach(squareEl => {
+            squareEl.removeAttribute('tabindex')
+            // Set the BG color of the next row to emphasize that it is disabled
+            if (squareEl.textContent == '') {
+                squareEl.style.backgroundColor = 'gray'
+            }
         })
     } 
 }
 
-// Add handleSubmit function to submit button to check if user guess matches the target word 
-submitButtonEl.addEventListener('click', handleSubmit)
+function handleColors() {
+     // Check if the user guessed the character at the right index
+     userGuesses[currentRowIndex].forEach((userGuessChar, index) => {
+        // If the character user clicks is at the same index as the char from target word 
+        if (userGuessChar == targetWords[currentRowIndex][index]) {
+            squareEls[index].style.backgroundColor = 'lightGreen'
+        }
+        // If the character user clicks exists somewhere in the target word 
+        else if (targetWords[currentRowIndex].includes(userGuessChar)) {
+            squareEls[index].style.backgroundColor = 'Yellow'
 
+        } else {
+            // currentRowIndex++
+        }
+    })
+}
 function handleSubmit() {
+    handleColors()
     // concat the user guess since it is in a nested array
     let guessedWord = userGuesses[currentRowIndex].join('')
-
     // compare user input with the target word
     if (guessedWord === targetWords[currentRowIndex]) {
         messageEl.textContent = "CONRATULATIONS! YOU GUESSED RIGHT!"
     }
+    else {
+        nextAttempt()
+    }
+    handleColors()
+
 }
+
+// function nextAttempt() {
+//     messageEl.textContent = 'TRY AGAIN'
+
+//     squareEls.forEach(squareEl => {
+//         if (squareEl.textContent == '') {
+//             squareEl.setAttribute('tabindex', 0)
+//             squareEl.style.backgroundColor = 'var(--secondary-color)'
+//         }
+//     })
+//     squareEls[5].focus()
+
+//     // handleColors()
+
+// }
