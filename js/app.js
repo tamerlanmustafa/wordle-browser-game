@@ -120,7 +120,7 @@ function checkForWin() {
             if (attempts > 0) {
                 nextAttempt();
             }else {
-                messageEl.textContent = "GAME OVER. The word was " + randomWord;
+                messageEl.textContent = "GAME OVER. The word was " + randomWord.toUpperCase();
             }
         }
     }
