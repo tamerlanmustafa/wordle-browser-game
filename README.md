@@ -8,6 +8,9 @@ Yellow: The letter is in the word but in the wrong position.
 Gray: The letter is not in the word.  
 
 Players use these clues to refine their guesses and ultimately find the correct word. Wordle became widely popular for its simplicity and daily challenge format, where a new word is available to guess each day.
+## Visit at:
+### https://tamerlanmustafayev.github.io/wordle-browser-game/
+
 # Getting started:
 1. As a user, I want to see clear instructions on how to play the Wordle game when the page loads.  
 1. As a user, I want to be able to start the game by clicking 'New Game'.  
