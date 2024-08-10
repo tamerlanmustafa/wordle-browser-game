@@ -9,7 +9,7 @@ const submitButtonEl = document.querySelector('#submit')
 const newGameButtonEl = document.querySelector('#new-game')
 
 const userGuesses = [[], [], [], [], []]
-const targetWords = [ 'agree', 'whale', 'clear', 'clean'];
+const targetWords = [ 'agree', 'whale', 'clear', 'clean', 'great', 'small'];
 const randomWord = targetWords[Math.floor(Math.random() * targetWords.length)];
 
 
