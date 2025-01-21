@@ -4,10 +4,11 @@ const messageEl = document.querySelector('#message')
 const squareEls = document.querySelectorAll('.sqr')
 const rowEls = document.querySelectorAll('.row')
 const submitButtonEl = document.querySelector('#submit')
-const newGameButtonEl = document.querySelector('#new-game')
-const userGuesses = [[], [], [], [], []]
+const restartButtonEl = document.querySelector('#restart')
 const targetWords = [ 'agree', 'whale', 'clear', 'clean', 'great', 'small'];
 const randomWord = targetWords[Math.floor(Math.random() * targetWords.length)];
+
+let userGuesses = [[], [], [], [], []]
 let attempts = 5
 let currentRowIndex = 0 
 let nextRowStartIndex = currentRowIndex * 5
@@ -19,11 +20,23 @@ document.addEventListener('keydown', (event) => {
 })
 submitButtonEl.addEventListener('click', handleSubmit)
 
+restartButtonEl.addEventListener('click', handleRestart)
 squareEls.forEach((squareEl) => {
     squareEls[0].focus()
     squareEl.addEventListener('keydown', handleKeydown)
 });
 
+
+
+function handleRestart() {
+    squareEls[0].focus();
+    userGuesses = [[], [], [], [], []] 
+    squareEls.forEach(squareEl => {
+        squareEl.textContent = ''
+        squareEl.style.backgroundColor = '#FEF3E2'
+        squareEl.setAttribute('tabindex', 0)
+    })
+}
 
 function handleKeydown(event) { 
     const squareEl = event.target;
@@ -50,6 +63,7 @@ function handleKeydown(event) {
     }
 }
 
+
 function callForSubmit() {
     if (userGuesses[currentRowIndex].length === 5) {
         messageEl.textContent = "SUBMIT YOUR GUESS"
@@ -57,7 +71,7 @@ function callForSubmit() {
         squareEls.forEach(squareEl => {
             squareEl.removeAttribute('tabindex')
         })
-    } 
+    }
 }
 
 function handleSubmit() {
