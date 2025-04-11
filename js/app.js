@@ -6,7 +6,7 @@ const rowEls = document.querySelectorAll('.row')
 const submitButtonEl = document.querySelector('#submit')
 const restartButtonEl = document.querySelector('#restart')
 const targetWords = [ 'agree', 'whale', 'clear', 'clean', 'great', 'small'];
-const randomWord = targetWords[Math.floor(Math.random() * targetWords.length)];
+let randomWord = targetWords[Math.floor(Math.random() * targetWords.length)];
 
 let userGuesses = [[], [], [], [], []]
 let attempts = 5
@@ -22,21 +22,29 @@ submitButtonEl.addEventListener('click', handleSubmit)
 
 restartButtonEl.addEventListener('click', handleRestart)
 squareEls.forEach((squareEl) => {
-    squareEls[0].focus()
     squareEl.addEventListener('keydown', handleKeydown)
 });
+squareEls[0].focus()
 
 
 
 function handleRestart() {
-    squareEls[0].focus();
+    randomWord = targetWords[Math.floor(Math.random() * targetWords.length)]
     userGuesses = [[], [], [], [], []] 
+    attempts = 5
+    currentRowIndex = 0
+    nextRowStartIndex = 0
+    attemptEl.textContent = `Attempts: ${attempts}`
+    messageEl.textContent = ""
+    
     squareEls.forEach(squareEl => {
         squareEl.textContent = ''
         squareEl.style.backgroundColor = '#FEF3E2'
         squareEl.setAttribute('tabindex', 0)
     })
+    squareEls[0].focus()
 }
+
 
 function handleKeydown(event) { 
     const squareEl = event.target;
@@ -45,22 +53,28 @@ function handleKeydown(event) {
         squareEl.textContent = event.key
         squareEls[squareIndex+1]?.focus() 
             if (userGuesses[currentRowIndex].length < 5) {
+                squareEl.textContent = event.key
                 userGuesses[currentRowIndex].push(event.key)
+                squareEls[squareIndex + 1]?.focus()
                 callForSubmit()
             }
-            else {
-                currentRowIndex++
-                userGuesses[currentRowIndex].push(event.key)
-                callForSubmit()
-            }
+        
     }
     else if (squareEl.textContent.length == 1 && event.key == 'Backspace') {
         squareEl.textContent = ''
+        const i = userGuesses[currentRowIndex].length - 1
+        if (i >= 0) userGuesses[currentRowIndex].pop()
     }
+    
     else if (squareEl.textContent.length == 0 && event.key == 'Backspace') {
-        squareEls[Number(event.target.id)-1].focus()
-        squareEls[Number(event.target.id)-1].textContent = ''
+        const prevIndex = Number(squareEl.id) - 1
+        if (prevIndex >= currentRowIndex * 5) {
+            squareEls[prevIndex].focus()
+            squareEls[prevIndex].textContent = ''
+            userGuesses[currentRowIndex].pop()
+        }
     }
+    
 }
 
 
